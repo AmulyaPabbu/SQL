@@ -1,0 +1,761 @@
+DBMS & RDBMS:
+-------------
+Initially data was stored in the form of files and this is called as File Management System. Example: notepads, excel sheets, etc. But the drawbacks where, we cannot organize the data and we cannot perform operations on data. Later DBMS came into picture which is Database Management System and it says we can store the data in the form of tables in the hard-drive. Later in this also there were drawbacks so RDBMS came into picture which is Relational Database Management System. Instead of storing all the data into one table(which DBMS did and was it's drawback), we can spilt the data into multiple tables and relate them. In this way data retrieval becomes easy. The software databases which satisfy DBMS features are Dbase, FoxPro, MS-access, etc. and which satisfy RDBMS features are Oracle, MS-SQL Server, DB2, MySQL, MS-Access, etc. Some are free sources and some need to be purchased. RDBMS is the latest and most used technology. But RDBMS also has drawbacks like storage limit, processing of huge data dynamically generating due to internet. So then BigData(helps in huge data) came into market and similarly NoSQL, but still they use RDBMS in the backend.
+
+Database:
+---------
+A data storage area.
+
+Any software/application has two/three(if it is a web-based application) layers those are, frontend layer, middle layer and backend layer. The frontend layer is the GUI layer, middle layer is Web-server/application-server where the business logic resides. So when we submit our information/data, the middle layer captures it and through the logic and data is stored in third layer which is the database layer. If user wants to login then with credentials he logs in and checks data but where is he getting this data from? This data is maintained in database layer. So when you search/check(request) it will fetch the data from the database.
+Generally the frontend is developed using scripting languages like html, dhtml, xml, asp.net, jsp, etc. The middle layer is developed using programming languages like c, c++, python, java, asp.net, c#, etc. And the database can be oracle, sql server, ms sql server, etc. so one of these databases is installed on their server and all the data is stored in that. In cases where the data load is more, we can increase the number of web-servers and database servers.
+
+SQL:
+----
+SQL is a language through which we can communicate with the database and perform operations like insert, select, delete, retrieve, etc.
+
+Suppose we have a database and it has many tables which contain data, so if we want to perform operations on data like inserting, selecting, deleting, retrieving then we need to communicate with the database. To do that we need a language and that is SQL(Structured Query Language), ANSI is the first company to design SQL, and other companies also designed but SQL is same for all databases(oracle, sql server, ms sql server).
+
+Database components:
+--------------------
+Client: is responsible for sending the request to server. Two clients cli(manually remember and type commands) or gui(no need to remember commands, just need to use them). Examples of client are sql developer, squirrel toad, cli, etc. Oracle database has sql developer(gui), sql plus(cli), toad, squirrel, aquadata studio, etc. MySQL has MySQLWorkbench(gui), MySQLCommandLinetool(cli), toad, squirrel, aquadata studio
+
+Server: is responsible for storing the data.
+
+Suppose we need to store/insert/select/delete data from database server so we need to send commands and for this we need client. All sql commands are executed in client but before that we need to connect to the server. Client/server are softwares, so once we installed database by default we get client and server. But server requires huge memory and client is light weight(simple editor/note). So mostly server will be installed on remote systems(unix/linux) and client in local systems(windows), you can have both on same system but so many people access and huge database is created so this does not need to be in local system.
+Normally a company has a database on remote system and multiple people want to connect and perform activities to that. So to connect they need client software on their local system and they provide some information like port number, name of machine, login details and editor will be provided where we execute sql commands. But we never install database in local systems because they are costly and huge.
+
+MySQL:
+------
+Open source database software available in the market. Database or Schema is considered as the same.
+
+SQL Commands:
+-------------
+1)DDL(Data Definition Language) Commands: CREATE, ALTER, DROP, TRUNCATE, RENAME
+2)DML(Data Manipulation Language) Commands: INSERT, UPDATE, DELETE
+3)DRL/DQL(Data Retrieval/Data Query Language) Commands: SELECT
+4)TCL(Transaction Control Language) Commands: COMMIT, ROLLBACK, SAVE POINT
+5)DCL(Data Control Language) Commands: GRANT, REVOKE
+
+Create Database/Schema:
+-----------------------
+CREATE DATABASE mydb;
+DROP DATABASE mydb;
+
+CREATE SCHEMA mydb;
+DROP SCHEMA mydb;
+
+CREATE DATABASE IF NOT EXISTS mydb;
+
+Creating Table:
+---------------
+CREATE TABLE<<Table Name>>(col1 datatype, col2 datatype, col3 datatype,....);
+
+Example:
+USE mydb;
+CREATE TABLE STUDENT(SNO INT(5), SNAME VARCHAR(15), MARKS INT(3));
+
+We can also write the entire statement in multiple lines.
+USE mydb;
+CREATE TABLE STUDENT(
+SNO INT(5), 
+SNAME VARCHAR(15), 
+MARKS INT(3));
+
+DESCRIBE command gives the structure/schema of the table.
+
+DESCRIBE STUDENT;
+
+Inserting data into table:
+--------------------------
+
+INSERT INTO<<TABLE NAME>> VALUES(VAL1, VAL2, VAL3,....);
+
+Example:
+USE mydb;
+INSERT INTO STUDENT VALUES(101, 'KIRAN', 80);
+INSERT INTO STUDENT(SNAME, SNO, MARKS) VALUES('RAM', 101, 80);
+INSERT INTO STUDENT VALUES(101, 'SITA', NULL);
+
+In whichever order you have passed the columns, in the same order you have to pass the data. And if sometimes you don't have all values then in that case we need to use 'NULL' and we cannot leave empty or cannot just give known values only, it has to be in order.
+
+Selecting/Retrieving Rows from a table:
+----------------------------
+USE hr;
+SELECT * FROM EMPLOYEES;
+SELECT EMPLOYEE_ID, FIRST_NAME, SALARY FROM EMPLOYEES;
+SELECT EMPLOYEE_ID EMPID, FIRST_NAME FNAME, SALARY+300 SAL FROM EMPLOYEES;
+
+To customize column names we use 'Aliases'.
+
+SQL Data types:
+---------------
+Numeric: TINYINT, SMALLINT, MEDIUMINT, INT, BIGINT,(till here these types accept number without decimal);FLOAT, DOUBLE, DECIMAL(these types accept decimal, scale is before decimal and precision is after decimal).
+
+Text: CHAR(), VARCHAR(), BLOB, MEDIUMTEXT, MEDIUMBLOB, LONGTEXT, LONGBLOB. text, images, audio, video, etc. are stored using these types.
+
+Date/Time: DATE, DATETIME, TIMESTAMP, TIME.
+
+WHERE clause: Used for selecting the rows based on condition(Filtering rows using where condition).
+-------------
+USE hr;
+SELECT * FROM EMPLOYEES;
+SELECT * FROM EMPLOYEES WHERE SALARY>3000;
+SELECT * FROM EMPLOYEES WHERE SALARY<=3000;
+SELECT * FROM EMPLOYEES WHERE DEPARTMENT_ID=30;
+SELECT * FROM EMPLOYEES WHERE COMMISSION_PCT is Null;
+SELECT * FROM EMPLOYEES WHERE FIRST_NAME='Jennifer';
+
+We cannot apply arithmetic operators on null.
+
+DISTINCT: Used to display the unique records from a table.
+---------
+SELECT DISTINCT DEPARTMENT_ID FROM EMPLOYEES;
+SELECT DISTINCT * FROM EMPLOYEES;
+
+Logical Operators(AND, OR, NOT): Used to check for more than one condition.
+--------------------------------
+USE hr;
+SELECT * FROM EMPLOYEES;
+SELECT * FROM EMPLOYEES WHERE SALARY>15000 AND JOB_ID='AD_VP';
+SELECT * FROM EMPLOYEES WHERE SALARY>15000 OR JOB_ID='AD_VP';
+SELECT * FROM EMPLOYEES WHERE NOT FIRST_NAME='David';
+
+Between & IN operators:
+-----------------------
+SELECT * FROM EMPLOYEES WHERE SALARY BETWEEN 10000 AND 120000;
+SELECT * FROM EMPLOYEES WHERE SALARY NOT BETWEEN 10000 AND 12000;
+
+SELECT * FROM EMPLOYEES WHERE SALARY IN(3400, 2500, 3000);
+SELECT * FROM EMPLOYEES WHERE SALARY NOT IN(3400, 2500, 3000);
+
+Pattern matching operators(Wildcard characters): _ represents single character and % represents multiple characters
+------------------------------------------------
+SELECT * FROM EMPLOYEES WHERE FIRST_NAME LIKE 'S%';
+SELECT * FROM EMPLOYEES WHERE FIRST_NAME LIKE '%r';
+
+SELECT * FROM EMPLOYEES WHERE FIRST_NAME LIKE 'S%r';
+
+SELECT * FROM EMPLOYEES WHERE FIRST_NAME LIKE '%m%';
+SELECT * FROM EMPLOYEES WHERE FIRST_NAME NOT LIKE 'S%';
+SELECT * FROM EMPLOYEES WHERE FIRST_NAME LIKE '%e_';
+SELECT * FROM EMPLOYEES WHERE FIRST_NAME LIKE '___';  #gives firstnames with 3 characters(den, lex, etc).
+
+DDL(Data Definition Language) Commands:
+---------------------------------------
+CREATE, ALTER, DROP, TRUNCATE, RENAME
+
+CREATE is used to create database objects(database, tables, views, synonymes, etc.)
+
+ALTER is used for,
+-adding a new column
+-drop an existing column
+-modify an existing column(increase/decrease the size of the column & change the data type of the column)
+-renaming a column
+
+USE mydb;
+CREATE TABLE STUDENT;
+
+INSERT INTO STUDENT VALUES(101, 'DAVID');
+INSERT INTO STUDENT VALUES(102, 'SMITH');
+INSERT INTO STUDENT VALUES(103, 'SCOTT');
+
+SELECT * FROM STUDENT;
+
+ALTER TABLE STUDENT ADD(GRADE VARCHAR(2));
+
+DESCRIBE STUDENT;
+
+ALTER TABLE STUDENT DROP COLUMN GRADE;
+
+ALTER TABLE STUDENT MODIFY COLUMN SNAME VARCHAR(20);
+
+ALTER TABLE STUDENT RENAME COLUMN SNO TO STUNO, SNAME TO STUNAME;
+
+DROP will completely drop the table.
+TRUNCATE when used, deletes only data permanently and the table structure still exists.
+DELETE when used, deletes data temporarily and table structure still exists.
+
+'autocommit' - a property in MySQL which is by default enabled as 1. Whenever we do certain action, MySQL automatically commits those records in the table. Commit in the sense it will make permanent action. If you want to get back the data, we need to set autocommit to zero.
+Also whenever we do deletes or updates then we need to set SQL_SAFE_UPDATES to zero. 
+
+DELETE:
+-------
+SET autocommit =0;
+SET SQL_SAFE_UPDATES=0;
+SELECT * FROM STUDENT;
+DELETE FROM STUDENT;
+COMMIT;
+ROLLBACK;
+
+DELETE temporarily deletes the data so to make it permanent we use commit after delete.
+
+TRUNCATE:
+---------
+TRUNCATE TABLE STUDENT;
+
+DROP:
+-----
+DROP TABLE STUDENT;
+
+drop and truncate come under ddl whereas delete comes under dml commands.
+
+RENAME TABLE jobs TO designations; #to rename a table, whereas to rename a column we use alter command
+
+Built-In functions in MYSQL: A function is a keyword when passed a parameter then returns some output.
+----------------------------
+1)String functions - operate on string data types.
+Upper() - converts into uppercase letters.
+SELECT UPPER(FIRST_NAME) FROM EMPLOYEES;
+Lower() -converts into lowercase letters.
+SELECT LOWER(FIRST_NAME) FROM EMPLOYEES;
+Length() - returns length of a string.
+SELECT LENGTH('Welcome');
+SELECT LENGTH(FIRST_NAME) FROM EMPLOYEES;
+Print the names of employees whose name has 4 characters.
+SELECT * FROM EMPLOYEES WHERE LENGTH(FIRST_NAME)=4;
+Trim() - removes the specified characters from both sides.
+SELECT TRIM('  oracle  ') FROM DUAL;
+SELECT TRIM('zzoraclezz')FROM DUAL;
+INSTR() - returns the position of a character within a string.
+SELECT INSTR('oracle', 'e');
+Substr()/Substring() - returns the substring of a string
+SELECT SUBSTR('ORACLE',2,3);
+SELECT SUBSTR('ORACLE',2,3);
+SELECT SUBSTR('ORACLE',2,3);
+SELECT SUBSTRING('ORACLE',2,3);
+SELECT SUBSTRING('ORACLE',2,3);
+SELECT SUBSTRING('ORACLE',2,3);
+Concat(): to join two strings
+SELECT CONCAT('ORACLE','TRAINING');
+SELECT CONCAT(FIRST_NAME,LAST_NAME)ENAME FROM EMPLOYEES;
+other string functions:  https://dev.mysql.com/doc/refman/5.5/en/string-functions.html
+
+2)Numeric functions - operate on numeric data types.
+SELECT ABS(-40);
+SELECT ABS(40);
+SELECT SQRT(100);
+SELECT MOD(10,3);
+SELECT POWER(2,5);
+TRUNCATE function truncates a number to specified decimal numbers.
+SELECT TRUNCATE(40.1234,3);
+SELECT TRUNCATE(40.1234,2);
+SELECT TRUNCATE(6876,-1);
+SELECT TRUNCATE(6876,-2);
+SELECT TRUNCATE(68763456,-5);
+SELECT GREATEST(100,200,300);
+SELECT LEAST(100,200,300);
+other numeric functions: check above link
+
+3)Date functions - operate on date data types.
+SELECT CURDATE();
+SELECT CURRENT_DATE();
+SELECT CURTIME();
+SELECT CURRENT_TIME();
+SELECT NOW();
+SELECT SYSDATE();
+SELECT MONTH();
+SELECT YEAR();
+SELECT DAY();
+for other functions refer link.
+Display employees who joined in year '1987'.
+SELECT * FROM EMPLOYEES WHERE YEAR(HIRE_DATE)="1987";
+Display employees who joined in June.
+SELECT * FROM EMPLOYEES WHERE MONTHNAME(HIRE_DATE)="JUNE";
+SELECT * FROM EMPLOYEES WHERE MONTH(HIRE_DATE)="6";
+
+4)Aggregate functions - operate on all data types and produce summarized results sets. Performed on multiple rows of single column of table and return single value.
+SELECT AVG(SALARY) FROM EMPLOYEES;
+SELECT SUM(SALARY) FROM EMPLOYEES;
+SELECT MAX(SALARY) FROM EMPLOYEES;
+SELECT MIN(SALARY) FROM EMPLOYEES;
+SELECT COUNT(*) FROM EMPLOYEES;
+
+Clauses:
+--------
+Group By - groups records into summary rows, returns one record for each group, typically also includes aggregates(count, max, sum, avg, etc.) and this clause can group by one or more columns.
+SELECT DEPARTMENT_ID,SUM(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID;
+SELECT DEPARTMENT_ID,AVG(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID;
+SELECT DEPARTMENT_ID,MAX(SALARY),MIN(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID;
+SELECT JOB_ID,COUNT(*) FROM EMPLOYEES GROUP BY JOB_ID;
+All the columns in the select list should be included in the group by clause;
+SELECT DEPARTMENT_ID,JOB_ID,SUM(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID,JOB_ID;
+SELECT DEPARTMENT_ID,SUM(SALARY),FIRST_NAME FROM EMPLOYEES GROUP BY DEPARTMENT_ID;  #invalid query
+
+Having - used to filter the output from the group by clause.
+SELECT DEPARTMENT_ID,SUM(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID HAVING SUM(SALARY)>20000;
+SELECT DEPARTMENT_ID,SUM(SALARY) FROM EMPLOYEES WHERE DEPARTMENT_ID<>50 GROUP BY DEPARTMENT_ID;
+
+The difference between using having and where clauses is that, having is used to filter after/on the grouped results and where is used before grouping if you want to apply any condition and then you can use having clause after group by clause here.
+
+Order By - used to arrange the rows in a table(ascending or descending order). Can be depending on multiple columns.
+SELECT * FROM EMPLOYEES ORDER BY DEPARTMENT_ID,DESC;
+SELECT * FROM EMPLOYEES ORDER BY SALARY;
+
+Order of execution:
+-------------------
+Where --> Group By --> Having --> Order By
+
+SELECT DEPARTMENT_ID,SUM(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID HAVING SUM(SALARY)>20000 ORDER BY SUM(SALARY);
+SELECT DEPARTMENT_ID,SUM(SALARY) FROM EMPLOYEES WHERE DEPARTMENT_ID<>100 GROUP BY DEPARTMENT_ID HAVING SUM(SALARY)>20000 ORDER BY SUM(SALARY) DESC;
+
+In case of working with multiple tables we can use three concepts: union & union all, joins, subqueries;
+
+Union & union all: used to combine the result set of two or more SELECT statements.
+------------------
+Each SELECT statement within union must have the same number of columns.
+The columns must also have similar data types.
+The columns in each SELECT statement must also be in the same order.
+
+Example: Let's say there are two tables with one column each named Number id(1,3,5 and 3,5,6 respectively). So what Union does is combine the tables and removes duplicates in the result set and what union all does is it will give all numbers including duplicates. So union - 1,3,5,6 and union all - 1,3,3,5,5,6.
+There are other functions like Intersect(gives common values from two tables) and Minus(gives numbers which are in table 1 and not in table 2) in other databases but not in MySQL.
+
+CREATE TABLE A(SNAME VARCHAR(10),NUM INT(2));
+CREATE TABLE B(NUM INT(2), GRADE VARCHAR(3));
+INSERT INTO A VALUES('ABC',10);
+INSERT INTO A VALUES('XYZ',11);
+INSERT INTO A VALUES('PQR',12);
+INSERT INTO A VALUES('MNO',15);
+COMMIT;
+INSERT INTO B VALUES(10, 'A');
+INSERT INTO B VALUES(11, 'B');
+INSERT INTO B VALUES(12, 'C');
+INSERT INTO B VALUES(14, 'A');
+COMMIT;
+
+Display all the records from multiple tables without duplicates;
+SELECT NUM FROM A UNION SELECT NUM FROM B;
+
+Display all the records from multiple tables including duplicates;
+SELECT NUM FROM A UNION ALL SELECT NUM FROM B;
+
+JOINS: Joins help retrieving data from two or more database tables.
+------
+The tables are mutually related using primary and foreign keys.
+Types of joins: before retrieving the data checks the condition from query whether the two tables have that common column or not.
+Equi join/Inner join/Simple join - returns only matched records from tab1 & tab2
+Right join - returns matched + unmatched records from right table
+Left join - returns matched + unmatched records from left table
+Full join - returns matched + unmatched records from both tables  #not supported by MySQL
+Self join
+
+Example: 
+CREATE TABLE TAB1(NUMID INT(3));
+CREATE TABLE TAB2(NUMID INT(3));
+
+INSERT INTO TAB1 VALUES(10);
+INSERT INTO TAB1 VALUES(11);
+INSERT INTO TAB1 VALUES(12);
+INSERT INTO TAB1 VALUES(14);
+
+INSERT INTO TAB1 VALUES(11);
+INSERT INTO TAB1 VALUES(12);
+INSERT INTO TAB1 VALUES(13);
+INSERT INTO TAB1 VALUES(15);
+
+SELECT * FROM TAB1;
+SELECT * FROM TAB2;
+
+
+tab1 NUMID(12,14,10,11) and tab2 NUMID(13,15,11,12)
+
+SELECT * FROM TAB1 INNER JOIN TAB2 ON TAB1.NUMID=TAB2.NUMID;        #Result:[11,12];
+SELECT * FROM TAB1 RIGHT OUTER JOIN TAB2 ON TAB1.NUMID=TAB2.NUMID;  #Result:[11,12,13,15];
+SELECT * FROM TAB1 LEFT OUTER JOIN TAB2 ON TAB1.NUMID=TAB2.NUMID;   #Result:[10,14,11,12];
+SELECT * FROM TAB1 FULL OUTER JOIN TAB2 ON TAB1.NUMID=TAB2.NUMID;   #Result:[10,14,11,12,1,15];
+
+Examples:
+Inner Join:
+-----------
+#1
+SELECT * FROM EMPLOYEES INNER JOIN DEPARTMENTS
+ON
+EMPLOYEES.DEPARTMENT_ID = DEPARTMENTS.DEPARTMENT_ID;   #Gives matched records from both tables based on condition only if DEPARTMENT_ID from both tables is equal.
+
+#2
+SELECT * FROM EMPLOYEES INNER JOIN DEPARTMENTS
+ON
+EMPLOYEES.DEPARTMENT_ID <> DEPARTMENTS.DEPARTMENT_ID;  #Gives records from both tables based on condition only if DEPARTMENT_ID from both tables is not equal.
+
+#3
+SELECT FIRST_NAME,SALARY,DEPARTMENT_ID FROM EMPLOYEES INNER JOIN DEPARTMENTS
+ON
+EMPLOYEES.DEPARTMENT_ID = DEPARTMENTS.DEPARTMENT_ID;   
+#Here FIRST_NAME AND SALARY are from EMPLOYEES table but since DEPARTMENT_ID is common in both tables, so during runtime MYSQL does not know from which table to consider DEPARTMENT_ID and on that to perform INNER Join.
+That's why we need to mention the table name as well.
+
+SELECT FIRST_NAME,SALARY,DEPARTMENTS.DEPARTMENT_ID FROM EMPLOYEES INNER JOIN DEPARTMENTS
+ON
+EMPLOYEES.DEPARTMENT_ID = DEPARTMENTS.DEPARTMENT_ID;     
+#Gives matched records of FIRST_NAME,SALARY and DEPARTMENT_ID based on condition only if DEPARTMENT_ID from both tables is equal.
+
+#4 Performing right and left joins.
+SELECT EMPLOYEE_ID,FIRST_NAME,JOB_ID,DEPARTMENTS.DEPARTMENT_ID,DEPARTMENT_NAME,LOCATION_ID
+FROM EMPLOYEES RIGHT JOIN DEPARTMENTS
+ON (EMPLOYEES.DEPARTMENT_ID = DEPARTMENTS.DEPARTMENT_ID);
+#Gives matched + unmatched records from right table.
+
+#5
+SELECT EMPLOYEE_ID,FIRST_NAME,JOB_ID,DEPARTMENTS.DEPARTMENT_ID,DEPARTMENT_NAME,LOCATION_ID
+FROM EMPLOYEES LEFT JOIN DEPARTMENTS
+ON (EMPLOYEES.DEPARTMENT_ID = DEPARTMENTS.DEPARTMENT_ID);
+#Gives matched + unmatched records from left table.
+
+Self Join: Join a table with the same table.
+----------
+Print employee details who is manager of other employees.
+SELECT E.EMPLOYEE_ID,M.MANAGER_ID,E.FIRST_NAME,E.JOB_ID,M.FIRST_NAME FROM
+EMPLOYEES E,EMPLOYEES M WHERE E.EMPLOYEE_ID=M.MANAGER_ID;
+#A point to remember here is the manager is also an employee and so he has employee_id.
+
+Sub Queries: Query within a query.
+------------
+Contains two parts,
+-Outer query
+-Inner query
+The output of inner query becomes the input of outer query.
+Two types of sub query,
+-Single row sub query(if the inner query returns single row as output), >=,<=,!=
+-Multi row sub query(if the inner query returns multiple rows as output), In,ANY,ALL
+
+Display employees whose salary is less than that of Ellen's.
+SELECT * FROM EMPLOYEES WHERE SALARY<(SELECT SALARY FROM EMPLOYEES WHERE FIRST_NAME='Ellen');
+
+Display 2nd max of salary.
+SELECT MAX(SALARY) FROM EMPLOYEES WHERE SALARY<(SELECT MAX(SALARY) FROM EMPLOYEES);
+
+Display max salary.
+SELECT MAX(SALARY) FROM EMPLOYEES WHERE SALARY<(SELECT MAX(SALARY) FROM EMPLOYEES WHERE SALARY<(SELECT MAX(SALARY) FROM EMPLOYEES));
+
+Find the salary of employees whose salary is greater than the salary of employee whose EMPLOYEE_ID is 150.
+SELECT SALARY FROM EMPLOYEES WHERE SALARY>(SELECT SALARY FROM EMPLOYEES WHERE EMPLOYEE_ID=150);
+
+#single row sub query
+Display the employees who are all earning the highest salary.
+SELECT * FROM EMPLOYEES WHERE SALARY=(SELECT MAX(SALARY) FROM EMPLOYEES);
+
+#multi row sub query
+Display the employees whose salary is equal to the salary of at least one employee in department id 30.
+SELECT * FROM EMPLOYEES WHERE SALARY IN(SELECT SALARY FROM EMPLOYEES WHERE DEPARTMENT_ID=30);
+
+Display the employees whose salary is less than salary of at least one employee in department id 30.
+SELECT * FROM EMPLOYEES WHERE SALARY <ANY(SELECT SALARY FROM EMPLOYEES WHERE DEPARTMENT_ID=30);
+
+Display the employees whose salary is greater than salary of at least one employee in department id 30.
+SELECT * FROM EMPLOYEES WHERE SALARY >ANY(SELECT SALARY FROM EMPLOYEES WHERE DEPARTMENT_ID=30);
+
+Display the employees whose salary is less than salary of all employees in department id 30.
+SELECT * FROM EMPLOYEES WHERE SALARY <ALL(SELECT SALARY FROM EMPLOYEES WHERE DEPARTMENT_ID=30);
+
+Query to get department name of employee.
+SELECT EMPLOYEE_ID,FIRST_NAME,DEPARTMENT_ID,(SELECT DEPARTMENT_NAME FROM DEPARTMENTS WHERE EMPLOYEES.DEPARTMENT_ID=DEPARTMENTS.DEPARTMENT_ID) DNAME FROM EMPLOYEES;
+
+List out the employees who are having salary less than the max salary and 
+also having hire date greater than the 
+hire date of an employee who is having max salary.
+SELECT EMPLOYEE_ID,FIRST_NAME,SALARY,HIRE_DATE FROM EMPLOYEES 
+WHERE 
+SALARY<(SELECT MAX(SALARY) FROM EMPLOYEES 
+AND 
+HIRE_DATE>(SELECT HIRE_DATE FROM EMLOYEES 
+WHERE 
+SALARY=(SELECT MAX(SALARY) FROM EMPLOYEES)));
+
+#breaking into smaller and multiple queries will ease up and also start writing the queries from backwards(innermost query).
+
+Integrity Constraints:
+----------------------
+SQL constraints are used to specify rules for data in a table.
+Constraints can be specified when the table is created with CREATE TABLE statement, or after the table is created with the ALTER TABLE statement.
+SQL Constraints:
+NOT NULL - Ensures that a column cannot have a null value. Can apply on any number of columns.
+CREATE TABLE STUDENT(SNO INT(3) NOT NULL,SNAME VARCHAR(10),MARKS INT(3));
+INSERT INTO STUDENT VALUES(101,'ARUN',50);   #CORRECT
+INSERT INTO STUDENT VALUES(NULL,'KIRAN',70); #INCORRECT
+
+UNIQUE - Ensures that all values in a column are different. Does not accept duplicate values. It can be applied on both column and table level. Can accept multiple NULLS.
+Column level:
+CREATE TABLE STUDENT(SNO INT(3) UNIQUE,SNAME VARCHAR(10),MARKS INT(3));
+Table level:
+CREATE TABLE STUDENT(SNO INT(3),SNAME VARCHAR(10),MARKS INT(3), UNIQUE(SNO));
+INSERT INTO STUDENT VALUES(101,'ARUN',50);
+INSERT INTO STUDENT VALUES(101,'KIRAN',60); #NOT ALLOWED
+INSERT INTO STUDENT VALUES(NULL,'ARJUN',70);
+INSERT INTO STUDENT VALUES(NULL,'RAJ',80); #ALLOWED
+
+PRIMARY KEY - A combination of a NOT NULL and UNIQUE. Uniquely identifies each row in a table. Will not accept duplicate and null values. It can be created at both table and column level.
+CREATE TABLE STUDENT(SNO INT(3) PRIMARY KEY,SNAME VARCHAR(10),MARKS INT(3));
+INSERT INTO STUDENT VALUES(101,'ARUN',40); 
+INSERT INTO STUDENT VALUES(101,'KIRAN',50);  #INVALID
+INSERT INTO STUDENT VALUES(NULL,'KIRAN',50); #INVALID
+Sometimes it is difficult to find a record based on single unique column, in that case if there are two unique not null columns then we can combine them both and use this combination. Creating PRIMARY KEY on combination of two columns is COMPOSITE PRIMARY KEY. And COMPOSITE KEY can be applied only at table level.
+CREATE TABLE STUDENT(SNO INT(3),CLASS INT(3),SNAME VARCHAR(10),MARKS INT(3),PRIMARY KEY(SNO,CLASS));
+
+
+FOREIGN KEY - Uniquely identifies a row/record in another table. Used to link two tables together. It is a field or a collection of fields in one table that refers to the primary key in another table. The table containing the foreign key is called child table and the table containing the candidate key is called referenced or parent table. We cannot delete records in parent table directly, we need to remove the records in child table first and then we will be able to delete records in parent table since it has some dependencies. Nulls are also accepted. Can be defined at table level as well. Column name can be different but the data type should be same.
+#parent table
+CREATE TABLE SCHOOL(
+SNO INT(3),
+SNAME VARCHAR(15),
+MARKS INT(3),
+PRIMARY KEY(SNO));
+INSERT INTO SCHOOL VALUES(101,'ARUN',50);
+INSERT INTO SCHOOL VALUES(102,'KIRAN',60);
+INSERT INTO SHCOOL VALUES(103,'RAJ',70);
+SELECT * FROM SHCOOL;
+
+#child table
+CREATE TABLE LIBRARY(
+SNO INT(3), FOREIGN KEY(SNO) REFERENCES SCHOOL(SNO), 
+BOOK_NAME VARCHAR(10));
+INSERT INTO LIBRARY VALUES(101,'JAVA');
+INSERT INTO LIBRARY VALUES(108,'C'); #INVALID
+INSERT INTO LIBRARY VALUES(NULL,'DOT NET');
+
+#Whenever we enter data into child table it references the parent table and if it is present in parent table only then it allows into child table.
+#Whenever we want to remove data from parent table then it needs to be deleted from child table first and then from parent table or else it won't allow.
+#To be able to delete directly from parent table which also deletes corresponding data from child table at the same time then we need to use ON DELETE CASCADE option.
+#parent table
+CREATE TABLE SCHOOL(
+SNO INT(3),
+SNAME VARCHAR(15),
+MARKS INT(3),
+PRIMARY KEY(SNO));
+INSERT INTO SCHOOL VALUES(101,'ARUN',50);
+INSERT INTO SCHOOL VALUES(102,'KIRAN',60);
+INSERT INTO SHCOOL VALUES(103,'RAJ',70);
+SELECT * FROM SHCOOL;
+DELETE FROM SHCOOL WHERE SNO=102;
+
+#child table
+CREATE TABLE LIBRARY(
+SNO INT(3), FOREIGN KEY(SNO) REFERENCES SCHOOL(SNO) ON DELETE CASCADE, 
+BOOK_NAME VARCHAR(10));
+INSERT INTO LIBRARY VALUES(101,'JAVA');
+INSERT INTO LIBRARY VALUES(102,'C');
+
+CHECK - Ensures that all values in a column satisfy a specific condition. Allows the user to enter specific values into column.
+CREATE TABLE SCHOOL(
+SNO INT(3),
+SNAME VARCHAR(15),
+MARKS INT(3) CHECK(MARKS BETWEEN 50 AND 100));
+INSERT INTO SCHOOL VALUES(101,'ARUN',60); #VALID
+INSERT INTO SCHOOL VALUES(101,'ARUN',40); #INVALID
+INSERT INTO SHCOOL VALUES(101,'ARUN',105); #INVALID
+
+DEFAULT - Sets a default value for a column when no value is specified. The default value will be added to all new records if no value is specified.
+CREATE TABLE ORDERS
+(ID INT(5), ORDERNUMBER INT(5), ORDERDATE DATETIME DEFAULT NOW());
+INSERT INTO ORDERS(ID, ORDERNUMBER)VALUES(101,2456);
+INSERT INTO ORDERS(ID, ORDERNUMBER)VALUES(102,2457);
+SELECT * FROM ORDERS;
+
+AUTO INCREMENT: a function which operates on numeric data types. It automatically generates sequential numeric values every time that a record is inserted into a table for a field 
+---------------
+defined as auto increment. And we cannot use Auto Increment directly without using PRIMARY KEY. Whenever you add new record, it gives a new number even though it has existing number.
+CREATE TABLE STUDENT(
+SNO INT(5) PRIMARY KEY AUTO_INCREMENT,
+SNAME VARCHAR(15),
+MARKS INT(5));
+
+ALTER TABLE STUDENT AUTO_INCREMENT=100;
+INSERT INTO STUDENT(SNAME,MARKS)VALUES('X',60);
+INSERT INTO STUDENT(SNAME,MARKS)VALUES('Y',45);
+INSERT INTO STUDENT(SNAME,MARKS)VALUES('Z',105);
+
+SET SQL_SAFE_UPDATES=0;
+DELETE FROM STUDENT;
+SELECT * FROM STUDENT;
+
+LIMIT: used to display limited rows from a table.
+------
+SELECT * FROM EMPLOYEES LIMIT 5;
+SELECT * FROM EMPLOYEES LIMIT 5,10;  #displays from 5th row to 10th row (10 counts not 5).
+
+VIEWS: 
+------
+A virtual table based on the result-set of an SQL statement. A mirror image of a table(logical object). We use it mostly for security purpose in case of providing access to others. We can apply all functions and operations on views. A view contains rows and columns just like a table. The fields in a view are fields from one or more real tables in the database. You can add SQL functions WHERE and JOIN statements to a view and present the data as if the data were coming from one single table. Changes made on original table will effect view but changes made on views will not effect original table.
+USE hr;
+SELECT * FROM EMPLOYEES;
+CREATE VIEW EMPLOYEES_V1 AS SELECT EMPLOYEE_ID,FIRST_NAME,SALARY FROM EMPLOYEES;  #whatever the select statement results that will be stored in the view employees_v1
+SELECT * FROM EMPLOYEES_V1;
+
+DROP VIEW EMPLOYEES_V1;
+
+INDEX:
+------
+Used to retrieve data from the database very fast. The users cannot see the indexes they are just used to speed up the searches/queries.
+CREATE INDEX IDX_EMPLOYEES ON EMPLOYEES(FIRST_NAME);
+
+DROP INDEX IDX_EMPLOYEES ON EMPLOYEES;
+
+TCL COMMANDS - COMMIT & ROLLBACK:
+---------------------------------
+Whenever we insert, update or delete data into a table if we use commit then the transactions will be permanent if not then they will be temporary/don't get saved. Also instead of using commit multiple times we can enable autocommit initially.
+Whenever we do operations if we want to go back to the initial state again i.e. transaction state then we can use rollback and it should be done before commit.
+SET autocommit=0; #disabled
+DROP TABLE STUDENT;
+CREATE TABLE STUDENT(SID INT(3),SNAME VARCHAR(15));
+INSERT INTO STUDENT VALUES(101,'ARUN');
+INSERT INTO STUDENT VALUES(102,'ARUN');
+INSERT INTO STUDENT VALUES(103,'ARUN');
+DELETE FROM STUDENT WHERE SID=103;  #DELETES RECORD TEMPORARILY
+SELECT * FROM STUDENT;
+ROLLBACK;  #ROLLBACK RECORD
+SELECT * FROM STUDENT;
+COMMIT;  #COMMITTED DELETE
+ROLLBACK;
+SELECT * FROM STUDENT;  #CANNOT RETRIEVE DELETED RECORDS AFTER COMMIT
+
+JDBC Java Database Connectivity with MySQL:
+-------------------------------------------
+Prerequisites: Jdk, eclipse and jdbc driver.
+In eclipse: java program
+
+package mysqldemos;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+/*Create connection
+  Create statement/query
+  Execute statement/query
+  Close connection
+*/
+
+public class MySQLDMLCommands {
+public static void main(String[] args) throws SQLException {
+
+//1)Create connection
+Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","root");
+
+//2)Create statement/query
+Statement stmt=con.createStatement();
+String s="INSERT INTO STUDENT VALUES(103,'SMITH')"; or "UPDATE STUDENT SET SNAME='DAVID' WHERE SID=103"; OR "DELETE FROM STUDENT WHERE SID=103"; 
+
+//3)Execute statement/query
+stmt.execute(s);
+
+//4)Close connection
+con.close();
+
+System.out.println("Query executed");
+
+}
+
+}
+
+Run the program and in the database check the records.
+
+Now let's see for SELECT command:
+package mysqldemos;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+/*Create connection
+  Create statement/query
+  Execute statement/query & Store the results in result set
+  Close connection
+*/
+
+public class MySQLDMLCommands {
+public static void main(String[] args) throws SQLException {
+
+//1)Create connection
+Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","root");
+
+//2)Create statement/query
+Statement stmt=con.createStatement();
+String s="SELECT EMPLOYEE_ID,FIRST_NAME,lAST_NAME FROM EMPLOYEES"; 
+//3)Execute statement/query & Store the results in result set
+ResultSet rs=stmt.execute(s);
+
+while(rs.next())
+{
+int eid= rs.getInt("EMPLOYEE_ID");
+string fname=rs.getString("FIRST_NAME");
+string lname=rs.getString("LAST_NAME");
+
+System.out.println(eid+"  "+fname+"  "+lname"  ");
+
+}
+
+//4)Close connection
+con.close();
+
+System.out.println("Query executed");
+
+}
+
+}
+
+ODBC Object Database Connectivity with MySQL:
+---------------------------------------------
+Download & install ODBC drivers.
+Creating DataSource(DSN).
+Download SQL ODBC Query tool.
+Connecting to MySQL DB using ODBC.
+
+Different ways we can connect to MySQL in CLI mode:
+---------------------------------------------------
+Connecting to MySQL DB using MySQL Shell.
+Connecting to MySQL DB using Command Line Client.
+Connecting to MySQL DB using Windows cmd.
+Connecting to Remote MySQL DB(either in Linux/Unix OS) using Putty.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
